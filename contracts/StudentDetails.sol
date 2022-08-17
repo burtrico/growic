@@ -5,29 +5,66 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol"; 
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
-contract YourContract {
+error AlreadyRegistered(uint256 studentID);
 
-  event SetPurpose(address sender, string purpose);
+contract StudentDetails {
+
+  // event SetPurpose(address sender, string purpose);
+
+    // string public purpose = "Building Unstoppable Apps!!!";
 
   address public owner;
 
-  string public purpose = "Building Unstoppable Apps!!!";
+  mapping (address => uint256) public students;
 
-  constructor() payable {
-    // what should we do on deploy?
+  constructor() {
     owner = msg.sender;
   }
 
-  // custom error?
-  // modifier onlyOwner: msg.sender = owner
-
-  function setPurpose(string memory newPurpose) public {
-      purpose = newPurpose;
-      console.log(msg.sender,"set purpose to",purpose);
-      emit SetPurpose(msg.sender, purpose);
+  modifier onlyOwner {
+    require(
+        msg.sender == owner,
+        "Only owner can call this function."
+    );
+    _;
   }
 
-  // to support receiving ETH by default
-  receive() external payable {}
-  fallback() external payable {}
+  if(owner = registered) 
+    revert AlreadyRegistered(owner);
+
+  
+  struct Student { // Struct
+    address studentID;
+    bool registered;
+    uint percentage;
+    uint totalMarks;
+  }
+
+    function register(address studentID) {}
+
+    function getStudentDetails(address studentID) {
+
+    }
+
+
+
+
+  // function setPurpose(string memory newPurpose) public {
+  //     purpose = newPurpose;
+  //     console.log(msg.sender,"set purpose to",purpose);
+  //     emit SetPurpose(msg.sender, purpose);
+  // }
+
+
+    // uint storedData;
+
+    // function set(uint x) public {
+    //     storedData = x;
+    // }
+
+    // function get() public view returns (uint) {
+    //     return storedData;
+    // }
+
+
 }
