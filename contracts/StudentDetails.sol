@@ -15,7 +15,15 @@ contract StudentDetails {
 
   address public owner;
 
-  mapping (address => uint256) public students;
+  struct Student { // Struct
+    address studentID;
+    bool registered;
+    uint percentage;
+    uint totalMarks;
+    uint index;
+  }
+
+  mapping (address => Student) public students;
 
   constructor() {
     owner = msg.sender;
@@ -33,14 +41,21 @@ contract StudentDetails {
     revert AlreadyRegistered(owner);
 
   
-  struct Student { // Struct
-    address studentID;
-    bool registered;
-    uint percentage;
-    uint totalMarks;
-  }
 
-    function register(address studentID) {}
+
+    function register(
+      address studentID,
+      uint percentage,
+      uint totalMarks
+      ) {
+        student = new Student;
+        
+        student.studentID = studentID;
+        student.percentage = percentage;
+        student.totalMarks = totalMarks;
+
+        students.push(student)
+      }
 
     function getStudentDetails(address studentID) {
 
