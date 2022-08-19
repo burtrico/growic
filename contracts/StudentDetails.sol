@@ -41,20 +41,29 @@ contract StudentDetails {
     revert AlreadyRegistered(owner);
 
   
+    // uint numCampaigns;
+    // mapping (uint => Campaign) campaigns;
 
+    // function newCampaign(address payable beneficiary, uint goal) public returns (uint campaignID) {
+    //     campaignID = numCampaigns++; // campaignID is return variable
+    //     // We cannot use "campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0)"
+    //     // because the right hand side creates a memory-struct "Campaign" that contains a mapping.
+    //     Campaign storage c = campaigns[campaignID];
+    //     c.beneficiary = beneficiary;
+    //     c.fundingGoal = goal;
+    // }
 
     function register(
       address studentID,
       uint percentage,
       uint totalMarks
-      ) {
-        student = new Student;
+      ) public returns (uint studentID) {
+        studentID = index++;
         
-        student.studentID = studentID;
-        student.percentage = percentage;
-        student.totalMarks = totalMarks;
-
-        students.push(student)
+        Student storage s = students[studentID]
+        s.studentID = studentID;
+        s.percentage = percentage;
+        s.totalMarks = totalMarks;
       }
 
     function getStudentDetails(address studentID) {
