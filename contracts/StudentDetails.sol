@@ -62,15 +62,26 @@ contract StudentDetails {
         
         Student storage s = students[studentID]
         s.studentID = studentID;
+        s.registered = true;
         s.percentage = percentage;
         s.totalMarks = totalMarks;
       }
 
-    function getStudentDetails(address studentID) {
+    function getStudentDetails(address studentID) public returns {
+      Student storage s = students[studentID]
 
+      if(s.registered) return s 
     }
 
-
+    // function checkGoalReached(uint campaignID) public returns (bool reached) {
+    //     Campaign storage c = campaigns[campaignID];
+    //     if (c.amount < c.fundingGoal)
+    //         return false;
+    //     uint amount = c.amount;
+    //     c.amount = 0;
+    //     c.beneficiary.transfer(amount);
+    //     return true;
+    // }
 
 
   // function setPurpose(string memory newPurpose) public {
