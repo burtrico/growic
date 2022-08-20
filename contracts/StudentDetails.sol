@@ -40,25 +40,13 @@ contract StudentDetails {
   if(owner = registered) 
     revert AlreadyRegistered(owner);
 
-  
-    // uint numCampaigns;
-    // mapping (uint => Campaign) campaigns;
-
-    // function newCampaign(address payable beneficiary, uint goal) public returns (uint campaignID) {
-    //     campaignID = numCampaigns++; // campaignID is return variable
-    //     // We cannot use "campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0)"
-    //     // because the right hand side creates a memory-struct "Campaign" that contains a mapping.
-    //     Campaign storage c = campaigns[campaignID];
-    //     c.beneficiary = beneficiary;
-    //     c.fundingGoal = goal;
-    // }
-
     function register(
       address studentID,
       uint percentage,
       uint totalMarks
       ) public returns (uint studentID) {
-        studentID = index++;
+        // studentID = index++;
+        // require()
         
         Student storage s = students[studentID]
         s.studentID = studentID;
@@ -70,36 +58,6 @@ contract StudentDetails {
     function getStudentDetails(address studentID) public returns {
       Student storage s = students[studentID]
 
-      if(s.registered) return s 
+      if(s) return s 
     }
-
-    // function checkGoalReached(uint campaignID) public returns (bool reached) {
-    //     Campaign storage c = campaigns[campaignID];
-    //     if (c.amount < c.fundingGoal)
-    //         return false;
-    //     uint amount = c.amount;
-    //     c.amount = 0;
-    //     c.beneficiary.transfer(amount);
-    //     return true;
-    // }
-
-
-  // function setPurpose(string memory newPurpose) public {
-  //     purpose = newPurpose;
-  //     console.log(msg.sender,"set purpose to",purpose);
-  //     emit SetPurpose(msg.sender, purpose);
-  // }
-
-
-    // uint storedData;
-
-    // function set(uint x) public {
-    //     storedData = x;
-    // }
-
-    // function get() public view returns (uint) {
-    //     return storedData;
-    // }
-
-
 }
