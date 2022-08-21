@@ -1,17 +1,13 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-import "hardhat/console.sol";
-import "@openzeppelin/contracts/access/Ownable.sol"; 
+import "../node_modules/hardhat/console.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol"; 
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
 
 error AlreadyRegistered(uint256 studentID);
 
 contract StudentDetails {
-
-  // event SetPurpose(address sender, string purpose);
-
-    // string public purpose = "Building Unstoppable Apps!!!";
 
   address public owner;
 
@@ -37,27 +33,27 @@ contract StudentDetails {
     _;
   }
 
-  if(owner = registered) 
-    revert AlreadyRegistered(owner);
+  // if(owner = registered) 
+  //   revert AlreadyRegistered(owner);
 
     function register(
       address studentID,
       uint percentage,
       uint totalMarks
-      ) public returns (uint studentID) {
+      ) public {
         // studentID = index++;
         // require()
         
-        Student storage s = students[studentID]
+        Student storage s = students[studentID];
         s.studentID = studentID;
         s.registered = true;
         s.percentage = percentage;
         s.totalMarks = totalMarks;
       }
 
-    function getStudentDetails(address studentID) public returns {
-      Student storage s = students[studentID]
+    function getStudentDetails(address studentID) public {
+      Student storage s = students[studentID];
 
-      if(s) return s 
+      return s; 
     }
 }
