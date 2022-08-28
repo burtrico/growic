@@ -11,12 +11,10 @@ contract StudentDetails {
 
   address public owner;
 
-  struct Student { // Struct
-    address studentID;
-    bool registered;
+  // number = uint, string = bytes32
+  struct Student {
     uint percentage;
     uint totalMarks;
-    uint index;
   }
 
   mapping (address => Student) public students;
@@ -36,24 +34,24 @@ contract StudentDetails {
   // if(owner = registered) 
   //   revert AlreadyRegistered(owner);
 
-    function register(
-      address studentID,
-      uint percentage,
-      uint totalMarks
-      ) public {
-        // studentID = index++;
-        // require()
-        
-        Student storage s = students[studentID];
-        s.studentID = studentID;
-        s.registered = true;
-        s.percentage = percentage;
-        s.totalMarks = totalMarks;
-      }
+  function register(
+    address studentID,
+    uint percentage_,
+    uint totalMarks_
+    ) public returns(bool success) {
+        students[studentID].percentage_ = percentage;
+        students[studentID].totalMarks = totalMarks_;
 
-    function getStudentDetails(address studentID) public {
-      Student storage s = students[studentID];
+        studentIndex.push(studentID);
+        return true;
+  }
 
-      return s; 
+  function getStudentDetails(address studentID)
+    public view returns(bytes32 ens, uint percentage, 
+    uint totalMarks) {
+      return(
+        students[studentID].ens,
+        students[studentID].percentage,
+        students[studentID].totalMarks);
     }
-}
+  }
