@@ -10,6 +10,9 @@ error AlreadyRegistered(uint256 studentID);
 contract StudentDetails {
 
   address public owner;
+  address[] public studentIndex;
+
+  // uint count = userIndex.length;
 
   // number = uint, string = bytes32
   struct Student {
