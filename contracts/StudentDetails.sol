@@ -12,7 +12,7 @@ contract StudentDetails {
   address public owner;
   address[] public studentIndex;
 
-  // uint count = userIndex.length;
+  uint count = userIndex.length;
 
   // number = uint, string = bytes32
   struct Student {
@@ -27,15 +27,12 @@ contract StudentDetails {
   }
 
   modifier onlyOwner {
-    require(
-        msg.sender == owner,
-        "Only owner can call this function."
-    );
-    _;
+    if ( msg.sender != owner) {
+        revert("Only owner can call this function.");
+    } else {
+        _;
+    }
   }
-
-  // if(owner = registered) 
-  //   revert AlreadyRegistered(owner);
 
   function register(
     address studentID,
